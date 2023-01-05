@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row">
+          <div class="col-sm-12">
+             <h3 class="page-title">Welcome Student!</h3>
+             <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Dashboard</li>
+             </ul>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <a href="#" class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-one w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-user-graduate"></i>
+                   </div>
+                   <div class="db-info">
+                      <!-- <h3>0</h3>
+                      <h6>Total Attendance</h6> -->
+                   </div>
+                </div>
+             </div>
+          </div>
+       </a>
+       <a href="#" class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-two w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-chalkboard-teacher"></i>
+                   </div>
+                   <div class="db-info">
+                      <!-- <h3>0</h3>
+                      <h6>Absent</h6> -->
+                   </div>
+                </div>
+             </div>
+          </div>
+       </a>
+       <a href="#" class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-three w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-graduation-cap"></i>
+
+                   </div>
+                   <div class="db-info">
+                      <!-- <h3>0</h3>
+                      <h6>Present</h6> -->
+                   </div>
+                </div>
+             </div>
+          </div>
+       </a>
+       <a href="#" class="col-xl-3 col-sm-6 col-12 d-flex">
+          <div class="card bg-four w-100">
+             <div class="card-body">
+                <div class="db-widgets d-flex justify-content-between align-items-center">
+                   <div class="db-icon">
+                      <i class="fas fa-book"></i>
+                   </div>
+                   <div class="db-info">
+                      <!-- <h3>0</h3>
+                      <h6>Total Subjects</h6> -->
+                   </div>
+                </div>
+             </div>
+          </div>
+       </a>
+    </div>
+    <div class="row">
+      <img src="{% static 'assets/img/time table.png' %}" class="img-fluid" alt="Responsive image">
+    </div>
+
+ </div>
+
+
+ {% endblock %}

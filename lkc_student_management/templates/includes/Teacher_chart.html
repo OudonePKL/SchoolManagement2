@@ -1,0 +1,55 @@
+<script>
+    $(document).ready(function() {
+    
+    // All data
+    var options = {
+              series: [{{student_count}}, {{5}}],
+              chart: {
+              width: 380,
+              type: 'pie',
+            },
+            labels: ['Students', 'kkk'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+            };
+    
+            var chart = new ApexCharts(document.querySelector("#All_details"), options);
+            chart.render();
+    
+    
+    var options = {
+              series: [{{student_gender_male}}, {{student_gender_female}}],
+              chart: {
+              width: 380,
+              type: 'pie',
+            },
+            labels: ['Male', 'Female'],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+            };
+    
+            var chart = new ApexCharts(document.querySelector("#student_gender"), options);
+            chart.render();
+    
+    
+    
+    });
+    </script>

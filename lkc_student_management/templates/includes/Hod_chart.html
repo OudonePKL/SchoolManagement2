@@ -1,0 +1,54 @@
+<script>
+$(document).ready(function() {
+
+// All data
+var options = {
+          series: [{{officer_count}}, {{teacher_count}},{{student_count}}],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['Officers', 'Teachers', 'Students'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#All_details"), options);
+        chart.render();
+
+
+// For Students in each Departments
+var options = {
+          series: [{{englishStudent_count}}, {{KoreanStudent_count}}, {{ChinesStudent_count}}],
+          chart: {
+          type: 'donut',
+        },
+        labels: ['English', 'Korean', 'Chines'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#student_in_each_department"), options);
+        chart.render();
+
+
+});
+</script>

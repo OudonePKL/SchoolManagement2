@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Officers</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Messages</a></li>
+                    <li class="breadcrumb-item active">Officers</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                    View All Messages
+                </button>
+            </div>
+        </div>
+    </div>
+    {% include 'includes/messages.html' %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="table_id" class="table table-hover table-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Officer ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th class="text-right">Messages</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in officer %}
+                                <tr>
+                                    <td>{{i.officerID}}</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="#" class="avatar avatar-sm mr-2">
+
+                                                {% if i.admin.profile_pic %}
+                                                <img class="avatar-img rounded-circle" src="/{{i.admin.profile_pic}}"
+                                                    alt="User Image">
+                                                {% else %}
+                                                <img class="avatar-img rounded-circle"
+                                                    src="{% static 'assets/img/profile.png' %}" alt="User Image">
+                                                {% endif %}
+
+                                            </a>
+                                            <a href="#">{{i.admin.username}}</a>
+                                        </h2>
+                                    </td>
+                                    <td>{{i.admin.email}}</td>
+
+                                    <td class="text-right">
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#sendnotification-{{forloop.counter}}">
+                                            Message
+                                        </button>
+                                    </td>
+
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- View all notification modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">All Messages</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="table_id" class="table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Message</th>
+                                                <th class="text-right">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in see_message %}
+                                            <tr>
+                                                <td style="width: 60%;">{{i.message}}</td>
+                                                {% if i.status == 0 %}
+                                                <td><span class="badge badge-danger">Unread The Message</span></td>
+                                                {% else %}
+                                                <td><span class="badge badge-success">Read The Message</span></td>
+                                                {% endif %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+{% for i in officer %}
+<div class="modal fade" id="sendnotification-{{forloop.counter}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenter"><strong>To:</strong> {{i.admin.first_name}}
+                    {{i.admin.last_name}} </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'save_officer_message' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="message" placeholder="Type here..." required>
+                        <input type="text" class="form-control" name="officer_id" value="{{i.admin.id}}" hidden>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
